@@ -147,9 +147,7 @@ class RenderGroupContainer<V> extends RenderBox
   bool hitTest(BoxHitTestResult result, {required Offset position}) {
     if (child case RenderBox child) {
       final childOffset = getParentDataOf(child).offset;
-      final hit = child.hitTest(result, position: position - childOffset);
-      debugPrint("hit=$hit");
-      return hit;
+      return child.hitTest(result, position: position - childOffset);
     }
     return false;
   }
@@ -159,7 +157,6 @@ class RenderGroupContainer<V> extends RenderBox
   //   if (child case RenderBox child) {
   //     //final childOffset = getParentDataOf(child).offset;
   //     final hit = child.hitTest(result, position: position);
-  //     //debugPrint("hit=$hit");
   //     return hit;
   //   }
   //   return false;

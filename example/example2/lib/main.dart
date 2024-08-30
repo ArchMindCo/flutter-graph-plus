@@ -15,21 +15,35 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  ThemeMode mode = ThemeMode.light;
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   GraphViewOrientation orientation = GraphViewOrientation.vertical;
+
+  ThemeMode mode = ThemeMode.light;
+  final modes = {
+    ThemeMode.light: (ThemeMode.dark, Icons.dark_mode, "Switch to dark theme"),
+    ThemeMode.dark: (
+      ThemeMode.system,
+      Icons.settings_brightness,
+      "Switch to system theme"
+    ),
+    ThemeMode.system: (
+      ThemeMode.light,
+      Icons.light_mode,
+      "Switch to light theme"
+    ),
+  };
 
   @override
   Widget build(BuildContext context) {
     final recorder = GraphViewRecorder();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: scaffoldKey,
       themeMode: mode,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       home: Scaffold(
-        appBar: AppBar(actions: [
-          OutlinedButton(onPressed: () {}, child: const Text("NoOp")),
+        appBar: AppBar(title: const Text("Graph+"), actions: [
           IconButton(
               onPressed: () {
                 setState(() => orientation = switch (orientation) {
@@ -50,24 +64,17 @@ class _MainAppState extends State<MainApp> {
                     .showSnackBar(const SnackBar(content: Text("copied!")));
               },
               icon: const Icon(Icons.content_copy)),
-          TextButton(
+          IconButton(
               onPressed: () {
                 setState(() {
-                  mode = switch (mode) {
-                    ThemeMode.light => ThemeMode.dark,
-                    ThemeMode.dark => ThemeMode.system,
-                    ThemeMode.system => ThemeMode.light
-                  };
+                  final (next, _, _) = modes[mode]!;
+                  mode = next;
                 });
               },
-              child: Text("$mode")),
+              icon: Tooltip(
+                  message: modes[mode]!.$3, child: Icon(modes[mode]!.$2))),
         ]),
         body: Center(
-          // child: TextButton(
-          //     onPressed: () {
-
-          //     },
-          //     child: const Text("Copy")),
           child: GraphView(
             Graph(vertices: const [
               V("a"),
