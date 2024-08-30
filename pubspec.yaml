@@ -1,5 +1,5 @@
 name: graph_plus
-version: 1.0.1-alpha
+version: 1.0.0-alpha
 description: >-
   Provides graphing and drawing features with a focus on software architecture diagramming capabilities
 repository: https://github.com/ArchMindCo/flutter-graph-plus
