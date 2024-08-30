@@ -1,2 +1,2 @@
 # graph_plus
-Provides a set of graphing and diagramming types and utilities
+Provides graphing and drawing features with a focus on software architecture diagramming capabilities
