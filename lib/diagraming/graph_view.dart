@@ -62,7 +62,7 @@ class GraphView<V, G> extends StatelessWidget {
 
     return recorder == null
         ? build()
-        : RepaintBoundary(key: recorder!.rbk, child: build());
+        : RepaintBoundary(key: recorder!.boundaryKey, child: build());
   }
 
   void tbd(BuildContext context) {}

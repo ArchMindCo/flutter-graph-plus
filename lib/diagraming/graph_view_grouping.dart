@@ -15,7 +15,7 @@ class GraphViewGrouping<V, G> {
       final g = assignGroup(vertex);
 
       for (final groupId in g) {
-        final current = groups.valueOf(groupId, newValue: {});
+        final current = groups.valueOf(groupId, initialValue: {});
         current.add(vertex.id);
       }
     }
